@@ -22,7 +22,7 @@ Use ThinkPHP 5.0 Create Restful API
 * 如果是邮箱，则将该验证码发送至用户输入的邮箱地址
 * 如果是手机号,则将该验证码发送至用户的手机
 * 调用参考：
-    1. api.movi.com/code/11/1/13368669852/0
+    1. GET请求：api.movi.com/code/11/1/13368669852/0
     ```js
     {
         "code": 200,
@@ -30,7 +30,7 @@ Use ThinkPHP 5.0 Create Restful API
         "data": []
     }  
     ```  
-    2. api.movi.com/code/11/1/88888888@qq.com/0
+    2. GET请求：api.movi.com/code/11/1/88888888@qq.com/0
     ```js
    {
         "code": 200,
