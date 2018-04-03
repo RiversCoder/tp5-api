@@ -15,7 +15,7 @@ Use ThinkPHP 5.0 Create Restful API
 * 在调用的控制器方法内(例如：User)，继承Common类
 * 涉及具体url参数的定义，可以查阅application目录下route.php文件
 
-### 验证码API
+### 验证码接口API
 
 * 创建Code类（继承Common类）实现创建验证码
 * 判断用户输入的邮箱或者手机号，匹配数据库，判断是否已经存在
@@ -40,4 +40,6 @@ Use ThinkPHP 5.0 Create Restful API
 }
 ```      
 
+### 用户注册接口API
 
+* 待续……
