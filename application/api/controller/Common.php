@@ -3,6 +3,7 @@
 namespace app\api\controller;
 
 use think\Controller;
+use think\Db;
 use think\Request;
 use think\Validate;
 
@@ -21,6 +22,18 @@ class Common extends Controller
             ),
             'register' => array(),
         ),
+        'Common' => array(
+            'get_code' => array(
+                'username' => 'require',
+                'is_exist' => 'require|number|length:1',
+            ),
+        ),
+        'Code' => array(
+            'get_code' => array(
+                'username' => 'require',
+                'is_exist' => 'require|number|length:1',
+            ),
+        ),
     );
 
     protected function _initialize()
@@ -36,6 +49,8 @@ class Common extends Controller
 
         //3. 验证参数,返回成功过滤后的参数数组
         $this->params = $this->checkParams($this->req->except(['time', 'token']));
+
+        //print_r($this->params);
     }
 
     //检测请求的时间是否超时
@@ -90,7 +105,8 @@ class Common extends Controller
      */
     protected function checkParams($arr)
     {
-        //1. 获取验证规则 (Array)
+
+        //1.获取验证规则 (Array)
         $rule = $this->rules[$this->req->controller()][$this->req->action()];
 
         //2. 验证参数并且返回错误
@@ -103,6 +119,54 @@ class Common extends Controller
         //3. 如果正常，就通过验证
 
         return $arr;
+    }
+
+    //检测用户名,并且返回用户名类别
+    protected function checkUsername($username)
+    {
+        $is_email = Validate::is($username, 'email') ? 1 : 0;
+        $is_phone = preg_match('/^1[34578]\d{9}$/', $username) ? 4 : 2;
+
+        $flag = $is_email + $is_phone;
+
+        switch ($flag) {
+            case 2:
+                //既不是邮箱，也不是手机号
+                $this->returnMsg(400, '用户名格式错误');
+                break;
+
+            case 3:
+                //邮箱
+                return 'email';
+                break;
+
+            case 4:
+                //手机号
+                return 'phone';
+                break;
+        }
+    }
+
+    protected function checkExist($value, $type, $exist)
+    {
+        $type_num = $type == 'phone' ? 2 : 4;
+        $flag = $type_num + $exist;
+
+        $phone_res = db('user')->where('user_phone', $value)->find();
+        $email_res = db('user')->where('user_email', $value)->find();
+
+        switch ($flag) {
+            case 2:
+                if ($phone_res) {
+                    $this->returnMsg(400, '此手机号已经被占用');
+                }
+                break;
+            case 4:
+                if ($email_res) {
+                    $this->returnMsg(400, '此邮箱已经被注册');
+                }
+                break;
+        }
     }
 
     //返回信息

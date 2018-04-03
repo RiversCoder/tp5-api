@@ -16,6 +16,9 @@ Route::domain('api', 'api');
 // api.movi.com/user/login -> api.movi.com/user
 Route::post('user', 'user/login');
 
+//配置验证码请求路径
+Route::get('code/:time/:token/:username/:is_exist', 'code/get_code');
+
 /*return [
 '__pattern__' => [
 'name' => '\w+',
