@@ -10,4 +10,9 @@ class User extends Common
 
         dump($data);
     }
+
+    public function register()
+    {
+        echo 'register !';
+    }
 }
