@@ -13,6 +13,7 @@ Use ThinkPHP 5.0 Create Restful API
     3. 验证参数是否合理
 
 * 在调用的控制器方法内(例如：User)，继承Common类
+* 涉及具体url参数的定义，可以查阅application目录下route.php文件
 
 ### 验证码API
 
@@ -38,5 +39,5 @@ Use ThinkPHP 5.0 Create Restful API
     "data": []
 }
 ```      
-* 具体其他参数的含义，可以查阅application目录下route.php文件
+
 

@@ -2,7 +2,7 @@
 
 namespace app\api\controller;
 
-//引入第三方邮件类
+//引入第三方邮件类、短信类
 use phpmailer\phpmailer;
 use submail\messagexsend;
 
