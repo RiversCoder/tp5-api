@@ -21,7 +21,7 @@ Use ThinkPHP 5.0 Create Restful API
 * 检测用户的输入信息，配合TP自带的检测机制完成检测结果，确认用户输入的是邮箱或者是手机号
 * 如果是邮箱，则将该验证码发送至用户输入的邮箱地址
 * 如果是手机号,则将该验证码发送至用户的手机
-* 调用参考：
+* 调用参考： 
 1. GET：api.movi.com/code/11/1/13368669852/0
 ```js
 {
@@ -38,5 +38,5 @@ Use ThinkPHP 5.0 Create Restful API
     "data": []
 }
 ```      
+* 具体其他参数的含义，可以查阅application目录下route.php文件
 
-  
