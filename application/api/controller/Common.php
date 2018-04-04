@@ -18,9 +18,13 @@ class Common extends Controller
         'User' => array(
             'login' => array(
                 'user_name' => ['require', 'chsDash', 'max' => 20],
-                'user_pwd' => ['require', 'max' => 16, 'min' => 6],
+                'user_pwd' => ['require', 'max' => 32, 'min' => 8],
             ),
-            'register' => array(),
+            'register' => array(
+                'user_name' => ['require'],
+                'user_pwd' => ['require', 'max' => 32, 'min' => 8],
+                'code' => ['require', 'number', 'length' => 6],
+            ),
         ),
         'Common' => array(
             'get_code' => array(
@@ -147,6 +151,13 @@ class Common extends Controller
         }
     }
 
+    /**
+     * [检测该字段是否已经存在数据库中]
+     * @param  [type] $value [description]
+     * @param  [type] $type  [description]
+     * @param  [type] $exist [description]
+     * @return [type]        [description]
+     */
     protected function checkExist($value, $type, $exist)
     {
         $type_num = $type == 'phone' ? 2 : 4;
@@ -167,6 +178,33 @@ class Common extends Controller
                 }
                 break;
         }
+    }
+
+    /**
+     * [检查验证码是否输入正确]
+     * @param  [string] $username [用户名(phone/email)]
+     * @param  [int] $code     [验证码]
+     * @return [json]           [执行返回信息]
+     */
+    protected function checkCode($username, $code)
+    {
+
+        //检测验证码时候输入正确
+        $input_code = md5($username . '_' . md5($code));
+        $last_code = session($username . '_code');
+
+        if ($input_code !== $last_code) {
+            $this->returnMsg('400', '验证码不正确，请重新输入！');
+        }
+
+        //检测是否超时
+        $last_time = session($username . '_last_send_time');
+        if (time() - $last_time > 60) {
+            $this->returnMsg('400', '验证码超过60秒，请重新发送！');
+        }
+
+        //清除验证通过的验证码session
+        session($username . '_code', null);
     }
 
     //返回信息

@@ -49,8 +49,8 @@ class Code extends Common
         $this->checkExist($username, $type, $exist);
 
         /* 检测验证码请求频率 30秒一次 */
-        if (session('?' . $username . '_last_send_time')) {
-            if (time() - session('?' . $username . '_last_send_time') < 30) {
+        if (session($username . '_last_send_time')) {
+            if (time() - session($username . '_last_send_time') < 30) {
                 $this->returnMsg(400, $type_name . '验证码，每30s只能发送一次');
             }
         }
@@ -59,7 +59,7 @@ class Code extends Common
         $code = $this->makeCode(6);
 
         /* 使用session存储验证码,方便对比，md5加密 */
-        $md5_code = md5($username . '_' . md5($username));
+        $md5_code = md5($username . '_' . md5($code));
         session($username . '_code', $md5_code);
 
         /* 使用session存储验证码的发送时间 */
