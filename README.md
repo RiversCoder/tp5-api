@@ -47,7 +47,7 @@ Use ThinkPHP 5.0 Create Restful API
 * 传递参数有默认的 token,time 还有 用户名、密码、验证码
 * 注册接口路由：Route::post('user/register', 'user/register');
 * 用该用户名(手机/邮箱)获取验证码,然后用这个用户名该调用该接口，才会匹配上验证码
-* url请求(POST): api.movi.com/user/register
+* url请求(POST) : api.movi.com/user/register
 * post参数：user_name 、 user_pwd、code
     
     | user_name | user_pwd | code | 
@@ -63,3 +63,30 @@ Use ThinkPHP 5.0 Create Restful API
 }
 ```
 
+### 用户登陆接口API
+
+* 传递参数有默认的 token,time 还有 用户名、密码
+* 登陆接口路由：Route::post('user/login', 'user/login');
+* url请求(POST) : api.movi.com/user/login
+* post参数：
+
+    | user_name | user_pwd |
+    | :-: | :-: |
+    | string | string|
+    | phone/email | 8 < length < 32 |
+
+* 返回数据参考:
+
+```js
+{
+    "code": 200,
+    "msg": "登陆成功！",
+    "data": {
+        "user_id": 3,
+        "user_phone": "",
+        "user_name": "",
+        "user_email": "1569853706@qq.com",
+        "user_rtime": 1522822718
+    }
+}
+```
