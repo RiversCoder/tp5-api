@@ -6,6 +6,11 @@ Use ThinkPHP 5.0 Create Restful API
 
 * 工具：Wampserver、ThinkPHP v5.0.10、CA证书、Postman、Navicat
 * 下载地址：[百度网盘下载](https://pan.baidu.com/s/1WDi2yApUyqxazGtLSaEcGQ '百度网盘') 密码：zqd0
+* 使用方法： 
+```
+git clone git@github.com:RiversCoder/tp5-api.git
+cd tp5-api
+```
 
 ### API编写前的相关配置(参数过滤)
 
