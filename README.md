@@ -4,8 +4,8 @@ Use ThinkPHP 5.0 Create Restful API
 
 ## 通过使用ThinkPHP来创建Restful风格API，实现移动端，服务端分离CS架构
 
-* 工具：Wampserver、ThinkPHP v5.0.10、CA证书、postman
-* 下载地址：[百度网盘下载](https://pan.baidu.com/s/1WDi2yApUyqxazGtLSaEcGQ?_blank '百度网盘') 密码：zqd0
+* 工具：Wampserver、ThinkPHP v5.0.10、CA证书、Postman、Navicat
+* 下载地址：[百度网盘下载](https://pan.baidu.com/s/1WDi2yApUyqxazGtLSaEcGQ '百度网盘') 密码：zqd0
 
 ### API编写前的相关配置(参数过滤)
 
