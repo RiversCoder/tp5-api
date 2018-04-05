@@ -4,6 +4,7 @@ namespace app\api\controller;
 
 use think\Controller;
 use think\Db;
+use think\Image;
 use think\Request;
 use think\Validate;
 
@@ -24,6 +25,10 @@ class Common extends Controller
                 'user_name' => ['require'],
                 'user_pwd' => ['require', 'max' => 32, 'min' => 8],
                 'code' => ['require', 'number', 'length' => 6],
+            ),
+            'uploadHeadImg' => array(
+                'user_id' => ['require', 'number'],
+                'user_icon' => ['require', 'image', 'fileSize' => 5000000, 'fileExt' => 'jpg,png,bpm,jpeg'],
             ),
         ),
         'Common' => array(
@@ -57,7 +62,7 @@ class Common extends Controller
         //$this->checkToken($this->req->param());
 
         //3. 验证参数,返回成功过滤后的参数数组
-        $this->params = $this->checkParams($this->req->except(['time', 'token']));
+        $this->params = $this->checkParams($this->req->param(true));
 
         //print_r($this->params);
     }
@@ -220,5 +225,48 @@ class Common extends Controller
         $return_data['data'] = $data;
 
         echo json_encode($return_data);die;
+    }
+
+    /**
+     * [上传文件到服务器]
+     * @param  [object] $file [文件资源]
+     * @param  [string] $type [图片类型]
+     * @return [string]       [图片在服务器的路径]
+     */
+    public function uploadFiles($file, $type = '')
+    {
+        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+
+        if ($info) {
+            //获取图片路径
+            $path = '/uploads/' . $info->getSaveName();
+            $path = preg_replace('/\\\\/', '/', $path);
+            //裁剪图片
+            if (!empty($type)) {
+                $this->imageEdit($path, $type);
+            }
+        } else {
+            $this->returnMsg(400, $file->getError());
+        }
+
+        return $path;
+    }
+
+    /**
+     * [图片裁剪]
+     * @param  [string] $path [原图片的绝对路径]
+     * @param  [string] $type [图片的类型]
+     * @return [null]
+     */
+    public function imageEdit($path, $type)
+    {
+        $image = Image::open(ROOT_PATH . 'public' . $path);
+        switch ($type) {
+            case 'head_img':
+                $image->thumb(200, 200, Image::THUMB_CENTER)->save(ROOT_PATH . 'public' . $path);
+                break;
+            case 'other_img':
+                break;
+        }
     }
 }

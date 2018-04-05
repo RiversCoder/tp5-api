@@ -13,8 +13,6 @@ use think\Route;
 
 // api.movi.com -> www.movi.com/index.php/api
 Route::domain('api', 'api');
-// api.movi.com/user/login -> api.movi.com/user
-Route::post('user', 'user/login');
 
 //配置验证码请求路径
 Route::get('code/:time/:token/:username/:is_exist', 'code/get_code');
@@ -24,6 +22,9 @@ Route::post('user/register', 'user/register');
 
 //配置用户登录的请求路径
 Route::post('user/login', 'user/login');
+
+//配置用户上传头像请求路径
+Route::post('user/icon', 'user/uploadHeadImg');
 
 /*return [
 '__pattern__' => [

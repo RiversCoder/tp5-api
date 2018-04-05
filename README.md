@@ -68,12 +68,12 @@ Use ThinkPHP 5.0 Create Restful API
 * 传递参数有默认的 token,time 还有 用户名、密码
 * 登陆接口路由：Route::post('user/login', 'user/login');
 * url请求(POST) : api.movi.com/user/login
-* post参数：
+* post参数：user_name 、 user_pwd
 
-    | user_name | user_pwd |
-    | :-: | :-: |
-    | string | string|
-    | phone/email | 8 < length < 32 |
+    | time | token | user_name | user_pwd |
+    | :-: | :-: | :-: | :-: |
+    | int | int | string | string|
+    | 时间戳 | 验证身份 | phone/email | 8 < length < 32 |
 
 * 返回数据参考:
 
@@ -90,3 +90,27 @@ Use ThinkPHP 5.0 Create Restful API
     }
 }
 ```
+
+### 用户上传头像接口API
+
+* 传递参数有默认的 token,time 还有 用户id、上传文件资源
+* 登陆接口路由：Route::post('user/icon', 'user/uploadHeadImg');
+* url请求(POST) : api.movi.com/user/icon
+* post参数：
+
+
+    | time | token | user_id | user_icon |
+    | :-: | :-: | :-: | :-: |
+    | int | int | int | object |
+    | 时间戳 | 验证身份 | 用户id | 上传的图片资源 |
+
+* 返回数据参考:
+
+```js
+{
+    "code": 200,
+    "msg": "上传头像成功",
+    "data": "/uploads/20180405/efa4c44b4dae92c092f66b4384f787d3.jpg"
+}
+``` 
+

@@ -41,6 +41,33 @@ class User extends Common
     }
 
     /**
+     * [用户上传头像接口请求的方法]
+     * @return [type] [description]
+     */
+    public function uploadHeadImg()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+
+        //print_r($this->datas);
+
+        //2. 上传文件获取路径
+        $head_img_path = $this->uploadFiles($this->datas['user_icon'], 'head_img');
+
+        //3. 存入数据库
+        $res = db('user')->where('user_id', $this->datas['user_id'])->update(['user_icon' => $head_img_path]);
+
+        //4. 返回结果给客户端
+        if (!empty($res)) {
+            $this->returnMsg(200, '上传头像成功', $head_img_path);
+        } else {
+            $this->returnMsg(400, '上传头像失败');
+        }
+    }
+
+    /* ---------------- 执行方法  ---------------- */
+
+    /**
      * [检测用户名类型]
      * @return [null]
      */
