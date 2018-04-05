@@ -7,6 +7,8 @@ class User extends Common
 
     public $datas;
 
+    /*------------------ 接口方法 -------------------*/
+
     /**
      * [用户登陆时接口请求的方法]
      * @return [null]
@@ -62,6 +64,40 @@ class User extends Common
             $this->returnMsg(200, '上传头像成功', $head_img_path);
         } else {
             $this->returnMsg(400, '上传头像失败');
+        }
+    }
+
+    /**
+     * [用户修改密码接口请求的方法]
+     * @return [null]
+     */
+    public function changePwd()
+    {
+        //1. 接受参数
+        $this->datas = $this->params;
+
+        //2. 确定用户名类型
+        $userType = $this->checkUsername($this->datas['user_name']);
+
+        //3. 确定该用户名是否已经存在数据库
+        $this->checkExist($this->datas['user_name'], $userType, 1);
+
+        //4. 同时匹配用户名和密码
+        $res = db('user')->where(['user_' . $userType => $this->datas['user_name'], 'user_pwd' => md5($this->datas['user_old_pwd'])])->find();
+
+        //5. 匹配成功则将新密码加密后更新该用户密码
+        if (!empty($res)) {
+
+            //更新user_pwd字段
+            $resu = db('user')->where('user_' . $userType, $this->datas['user_name'])->update(['user_pwd' => md5($this->datas['user_pwd'])]);
+
+            if (!empty($resu)) {
+                $this->returnMsg(200, '密码修改成功!');
+            } else {
+                $this->returnMsg(200, '密码修改失败!');
+            }
+        } else {
+            $this->returnMsg(400, '密码错误!');
         }
     }
 

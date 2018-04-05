@@ -1,4 +1,4 @@
-use ThinkPHP 5.0 create restful api
+Use ThinkPHP 5.0 create restful api
 ===============
 
 
@@ -52,8 +52,7 @@ cd tp5-api
 
 ### 用户注册接口API
 
-* 传递参数有默认的 token,time 还有 用户名、密码、验证码
-* 注册接口路由：Route::post('user/register', 'user/register');
+* 接口路由：Route::post('user/register', 'user/register')
 * 用该用户名(手机/邮箱)获取验证码，然后用这个用户名该调用该接口，才会匹配上验证码
 * url请求(POST) : api.movi.com/user/register
 * post参数：user_name 、 user_pwd、code
@@ -61,7 +60,7 @@ cd tp5-api
     | user_name | user_pwd | code | 
     | :-: | :-: | :-: | 
     | string | string| int | 
-    | phone/email | 8 < length < 32 | length=6 | 
+    | 用户名 | 用户密码 | 验证码 | 
 * 返回数据参考:
 ```js
 {
@@ -73,15 +72,14 @@ cd tp5-api
 
 ### 用户登陆接口API
 
-* 传递参数有默认的 token,time 还有 用户名、密码
-* 登陆接口路由：Route::post('user/login', 'user/login');
+* 接口路由：Route::post('user/login', 'user/login')
 * url请求(POST) : api.movi.com/user/login
 * post参数：user_name 、 user_pwd
 
     | time | token | user_name | user_pwd |
     | :-: | :-: | :-: | :-: |
     | int | int | string | string|
-    | 时间戳 | 验证身份 | phone/email | 8 < length < 32 |
+    | 时间戳 | 验证身份 | 用户名 | 用户密码 |
 
 * 返回数据参考:
 
@@ -101,8 +99,7 @@ cd tp5-api
 
 ### 用户上传头像接口API
 
-* 传递参数有默认的 token,time 还有 用户id、上传文件资源
-* 登陆接口路由：Route::post('user/icon', 'user/uploadHeadImg');
+* 接口路由：Route::post('user/icon', 'user/uploadHeadImg')
 * url请求(POST) : api.movi.com/user/icon
 * post参数：
 
@@ -123,3 +120,23 @@ cd tp5-api
 ``` 
 
 ### 用户修改密码接口API
+
+* 接口路由：Route::post('user/change_pwd', 'user/changePwd')
+* url请求(POST) : api.movi.com/user/change_pwd
+* post参数：
+
+
+    | time | token | user_name | user_old_pwd | user_pwd |
+    | :-: | :-: | :-: | :-: | :-: |
+    | int | int | string | string | string |
+    | 时间戳 | 验证身份 | 用户名 | 旧密码 | 新密码 |
+
+* 返回数据参考:
+
+```js
+{
+    "code": 200,
+    "msg": "密码修改成功!",
+    "data": []
+}
+``` 

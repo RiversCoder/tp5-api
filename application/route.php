@@ -26,6 +26,9 @@ Route::post('user/login', 'user/login');
 //配置用户上传头像请求路径
 Route::post('user/icon', 'user/uploadHeadImg');
 
+//配置用户修改密码请求路径
+Route::post('user/change_pwd', 'user/changePwd');
+
 /*return [
 '__pattern__' => [
 'name' => '\w+',

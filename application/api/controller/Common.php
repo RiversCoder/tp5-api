@@ -30,6 +30,11 @@ class Common extends Controller
                 'user_id' => ['require', 'number'],
                 'user_icon' => ['require', 'image', 'fileSize' => 5000000, 'fileExt' => 'jpg,png,bpm,jpeg'],
             ),
+            'changePwd' => array(
+                'user_name' => ['require'],
+                'user_old_pwd' => ['require', 'max' => 32, 'min' => 8],
+                'user_pwd' => ['require', 'max' => 32, 'min' => 8],
+            ),
         ),
         'Common' => array(
             'get_code' => array(
@@ -179,12 +184,22 @@ class Common extends Controller
         switch ($flag) {
             case 2:
                 if ($phone_res) {
-                    $this->returnMsg(400, '此手机号已经被占用');
+                    $this->returnMsg(400, '此手机号已经被占用！');
+                }
+                break;
+            case 3:
+                if (empty($phone_res)) {
+                    $this->returnMsg(400, '此手机号不存在！');
                 }
                 break;
             case 4:
                 if ($email_res) {
-                    $this->returnMsg(400, '此邮箱已经被注册');
+                    $this->returnMsg(400, '此邮箱已经被注册！');
+                }
+                break;
+            case 5:
+                if (empty($email_res)) {
+                    $this->returnMsg(400, '此邮箱不存在！');
                 }
                 break;
         }
