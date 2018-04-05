@@ -1,11 +1,11 @@
-Use ThinkPHP 5.0 Create Restful API
+use ThinkPHP 5.0 create restful api
 ===============
 
 
 ## 通过使用ThinkPHP来创建Restful风格API，实现移动端，服务端分离CS架构
 
 * 工具：Wampserver、ThinkPHP v5.0.10、CA证书、Postman、Navicat
-* 下载地址：[百度网盘下载](https://pan.baidu.com/s/1WDi2yApUyqxazGtLSaEcGQ '百度网盘') 密码：zqd0
+* 工具下载地址：[百度网盘下载](https://pan.baidu.com/s/1WDi2yApUyqxazGtLSaEcGQ '百度网盘') 密码：zqd0
 * 使用方法： 
 ```
 git clone git@github.com:RiversCoder/tp5-api.git
