@@ -4,6 +4,9 @@ Use ThinkPHP 5.0 Create Restful API
 
 ## 通过使用ThinkPHP来创建Restful风格API，实现移动端，服务端分离CS架构
 
+* 工具：Wampserver、ThinkPHP v5.0.10、CA证书、postman
+* 下载地址：[百度网盘下载](https://pan.baidu.com/s/1WDi2yApUyqxazGtLSaEcGQ '百度网盘') 密码：zqd0
+
 ### API编写前的相关配置(参数过滤)
 
 * 在applicaton/route.php中配置路由：实现api二级域名访问指定模块; 配置域名参数简写风格
@@ -46,7 +49,7 @@ Use ThinkPHP 5.0 Create Restful API
 
 * 传递参数有默认的 token,time 还有 用户名、密码、验证码
 * 注册接口路由：Route::post('user/register', 'user/register');
-* 用该用户名(手机/邮箱)获取验证码,然后用这个用户名该调用该接口，才会匹配上验证码
+* 用该用户名(手机/邮箱)获取验证码，然后用这个用户名该调用该接口，才会匹配上验证码
 * url请求(POST) : api.movi.com/user/register
 * post参数：user_name 、 user_pwd、code
     
@@ -114,3 +117,4 @@ Use ThinkPHP 5.0 Create Restful API
 }
 ``` 
 
+### 用户修改密码接口API
