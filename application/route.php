@@ -38,6 +38,9 @@ Route::post('user/bind_phone_email', 'user/bindPhoneEmail');
 //配置用户设置用户昵称
 Route::post('user/nickname', 'user/modifyUsername');
 
+//配置添加文章请求路径
+Route::post('article', 'article/addArticle');
+
 /*return [
 '__pattern__' => [
 'name' => '\w+',

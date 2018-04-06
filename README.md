@@ -208,4 +208,25 @@ cd tp5-api
 }
 ``` 
 
+### 新增文章接口API
+
+* 接口路由：Route::post('article', 'article/addArticle')
+* url请求(POST) : api.movi.com/article
+* post参数： * 表示必须字段
+
+
+    | article_uid | article_title | artcle_time | article_content |
+    | :-: | :-: | :-: | :-: |
+    | int |  string | int | string |
+    | *用户ID | *文章标题 | *时间戳 | 文章内容 |
+
+* 返回数据参考: (data为文章的id)
+
+```js
+{
+    "code": 200,
+    "msg": "新增文章成功！",
+    "data": "5" 
+}
+``` 
 

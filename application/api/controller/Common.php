@@ -50,6 +50,12 @@ class Common extends Controller
                 'user_nickname' => ['require', 'chsDash'],
             ),
         ),
+        'Article' => array(
+            'addArticle' => array(
+                'article_title' => ['require', 'chsDash'],
+                'article_uid' => ['require', 'number'],
+            ),
+        ),
         'Common' => array(
             'get_code' => array(
                 'username' => 'require',
