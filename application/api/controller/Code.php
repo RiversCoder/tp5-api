@@ -15,8 +15,6 @@ class Code extends Common
 
         $username_type = $this->checkUsername($username);
 
-        echo $username_type;
-
         switch ($username_type) {
             case 'email':
                 $this->getCodeByUsername($username, 'email', $exist);
@@ -119,7 +117,7 @@ class Code extends Common
         $submail = new MESSAGEXsend();
         $submail->setTo($phone);
         $submail->SetProject('FoJ494');
-        $submail->AddVar('time', 60);
+        $submail->AddVar('time', 600);
         $submail->AddVar('code', $code);
         $xsend = $submail->xsend();
 
@@ -127,7 +125,7 @@ class Code extends Common
         if ($xsend['status'] !== 'success') {
             $this->returnMsg(400, $xsend['msg']);
         } else {
-            $this->returnMsg(200, '手机验证码发送成功，每天发送5次，请在一分钟内验证！');
+            $this->returnMsg(200, '手机验证码发送成功，每天发送5次，请在十分钟内验证！');
         }
     }
 

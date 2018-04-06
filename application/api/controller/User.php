@@ -101,6 +101,24 @@ class User extends Common
         }
     }
 
+    public function findPwd()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+        //2. 检测用户名类型
+        $userType = $this->checkUsername($this->datas['user_name']);
+        //3. 检测验证码
+        $this->checkCode($this->datas['user_name'], $this->datas['code']);
+        //4. 如果验证码匹配成功 就更新密码字段
+        $res = db('user')->where('user_' . $userType, $this->datas['user_name'])->update(['user_pwd' => md5($this->datas['user_pwd'])]);
+        //5. 返回执行结果
+        if (!empty($res)) {
+            $this->returnMsg(200, '密码修改成功!');
+        } else {
+            $this->returnMsg(400, '密码修改失败!');
+        }
+    }
+
     /* ---------------- 执行方法  ---------------- */
 
     /**

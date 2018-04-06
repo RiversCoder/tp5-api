@@ -140,3 +140,16 @@ cd tp5-api
     "data": []
 }
 ``` 
+
+### 用户找回密码接口API
+
+* 接口路由：Route::post('user/find_pwd', 'user/findPwd')
+* url请求(POST) : api.movi.com/user/find_pwd
+* post参数：
+
+
+    | time | token | user_name | user_pwd | code |
+    | :-: | :-: | :-: | :-: | :-: |
+    | int | int | string | string | int |
+    | 时间戳 | 验证身份 | 用户名 | 新密码 | 验证码 |
+

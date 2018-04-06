@@ -35,6 +35,11 @@ class Common extends Controller
                 'user_old_pwd' => ['require', 'max' => 32, 'min' => 8],
                 'user_pwd' => ['require', 'max' => 32, 'min' => 8],
             ),
+            'findPwd' => array(
+                'user_name' => ['require'],
+                'code' => ['require', 'number', 'length' => 6],
+                'user_pwd' => ['require', 'max' => 32, 'min' => 8],
+            ),
         ),
         'Common' => array(
             'get_code' => array(
@@ -224,8 +229,8 @@ class Common extends Controller
 
         //检测是否超时
         $last_time = session($username . '_last_send_time');
-        if (time() - $last_time > 60) {
-            $this->returnMsg('400', '验证码超过60秒，请重新发送！');
+        if (time() - $last_time > 600) {
+            $this->returnMsg('400', '验证码超过600秒，请重新发送！');
         }
 
         //清除验证通过的验证码session
