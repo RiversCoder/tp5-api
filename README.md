@@ -153,3 +153,59 @@ cd tp5-api
     | int | int | string | string | int |
     | 时间戳 | 验证身份 | 用户名 | 新密码 | 验证码 |
 
+* 返回数据参考:
+
+```js
+{
+    "code": 200,
+    "msg": "密码修改成功!",
+    "data": []
+}
+``` 
+
+
+### 用户绑定邮箱/手机接口API
+
+* 接口路由：Route::post('user/bind_phone_email', 'user/bindPhoneEmail')
+* url请求(POST) : api.movi.com/user/bind_phone_email
+* post参数：
+
+
+    | time | token | user_name | user_id | code |
+    | :-: | :-: | :-: | :-: | :-: |
+    | int | int | string | int | int |
+    | 时间戳 | 验证身份 | 要绑定的手机号/邮箱 | 用户ID | 验证码 |
+
+* 返回数据参考:
+
+```js
+{
+    "code": 200,
+    "msg": "绑定邮箱成功！",
+    "data": []
+}
+``` 
+
+### 用户设置昵称接口API
+
+* 接口路由：Route::post('user/nickname', 'user/modifyUsername')
+* url请求(POST) : api.movi.com/user/nickname
+* post参数：
+
+
+    | time | token | user_nickname | user_id |
+    | :-: | :-: | :-: | :-: |
+    | int | int | string | int |
+    | 时间戳 | 验证身份 | 昵称 | 用户ID |
+
+* 返回数据参考:
+
+```js
+{
+    "code": 200,
+    "msg": "昵称设置成功！",
+    "data": []
+}
+``` 
+
+

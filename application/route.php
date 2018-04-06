@@ -32,6 +32,12 @@ Route::post('user/change_pwd', 'user/changePwd');
 //配置用户找回密码请求路径
 Route::post('user/find_pwd', 'user/findPwd');
 
+//配置用户绑定手机号/邮箱
+Route::post('user/bind_phone_email', 'user/bindPhoneEmail');
+
+//配置用户设置用户昵称
+Route::post('user/nickname', 'user/modifyUsername');
+
 /*return [
 '__pattern__' => [
 'name' => '\w+',

@@ -92,11 +92,11 @@ class Code extends Common
         $mail->Password = "movi103103";
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 994;
-        $mail->setFrom('lgc928091232@163.com', '接口测试');
+        $mail->setFrom('lgc928091232@163.com', 'movi');
         $mail->addAddress($toemail, '您好！');
         $mail->addReplyTo('lgc928091232@163.com', 'Replay');
         $mail->Subject = "您有新的验证码!";
-        $mail->Body = "这是一个测试邮件，您的验证码时" . $code . "，验证码的有效期为60秒，本邮件请勿回复！";
+        $mail->Body = "您的验证码时" . $code . "，验证码的有效期为600秒，本邮件请勿回复！";
 
         //如果发送失败
         if (!$mail->send()) {

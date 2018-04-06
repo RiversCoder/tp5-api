@@ -40,6 +40,15 @@ class Common extends Controller
                 'code' => ['require', 'number', 'length' => 6],
                 'user_pwd' => ['require', 'max' => 32, 'min' => 8],
             ),
+            'bindPhoneEmail' => array(
+                'user_id' => ['require', 'number'],
+                'user_name' => ['require'],
+                'code' => ['require', 'number', 'length' => 6],
+            ),
+            'modifyUsername' => array(
+                'user_id' => ['require', 'number'],
+                'user_nickname' => ['require', 'chsDash'],
+            ),
         ),
         'Common' => array(
             'get_code' => array(

@@ -94,13 +94,17 @@ class User extends Common
             if (!empty($resu)) {
                 $this->returnMsg(200, '密码修改成功!');
             } else {
-                $this->returnMsg(200, '密码修改失败!');
+                $this->returnMsg(400, '密码修改失败!');
             }
         } else {
             $this->returnMsg(400, '密码错误!');
         }
     }
 
+    /**
+     * [用户找回密码接口请求的方法]
+     * @return [type] [description]
+     */
     public function findPwd()
     {
         //1. 接收参数
@@ -116,6 +120,54 @@ class User extends Common
             $this->returnMsg(200, '密码修改成功!');
         } else {
             $this->returnMsg(400, '密码修改失败!');
+        }
+    }
+
+    /**
+     * [用户绑定邮箱/手机接口请求的方法]
+     * @return [type] [description]
+     */
+    public function bindPhoneEmail()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+        //2. 检测用户名类型
+        $userType = $this->checkUsername($this->datas['user_name']);
+        //3. 匹配验证码
+        $this->checkCode($this->datas['user_name'], $this->datas['code']);
+        //4. 更新数据库
+        $res = db('user')->where('user_id', $this->datas['user_id'])->update(['user_' . $userType => $this->datas['user_name']]);
+
+        //返回执行结果
+        $returnStr = $userType == 'phone' ? '手机' : '邮箱';
+        if (!empty($res)) {
+            $this->returnMsg(200, '绑定' . $returnStr . '成功！');
+        } else {
+            $this->returnMsg(400, '绑定' . $returnStr . '失败！');
+        }
+    }
+
+    /**
+     * [用户设置昵称接口请求的方法]
+     * @return [type] [description]
+     */
+    public function modifyUsername()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+        //2. 检测该昵称是否被占用
+        $res = db('user')->where('user_nickname', $this->datas['user_nickname'])->find();
+        //返回执行结果
+        if (!empty($res)) {
+            $this->returnMsg(400, '该昵称已被暂用！');
+        }
+        //3. 修改user_nickname
+        $ress = db('user')->where('user_id', $this->datas['user_id'])->update(['user_nickname' => $this->datas['user_nickname']]);
+        //返回执行结果
+        if (!empty($ress)) {
+            $this->returnMsg(200, '昵称设置成功！');
+        } else {
+            $this->returnMsg(400, '昵称设置失败！');
         }
     }
 
@@ -154,10 +206,10 @@ class User extends Common
         $res = db('user')->insert($this->datas);
 
         //返回执行结果
-        if (!$res) {
-            $this->returnMsg(400, '用户注册失败！');
-        } else {
+        if (!empty($res)) {
             $this->returnMsg(200, '用户注册成功！');
+        } else {
+            $this->returnMsg(400, '用户注册失败！');
         }
     }
 
