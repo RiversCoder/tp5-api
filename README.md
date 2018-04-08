@@ -242,7 +242,7 @@ cd tp5-api
     | int | int | int |  int | int |
     | *时间戳 | *验证身份 | *用户ID | 查询条数 | 查询页数 |
 
-* 返回数据参考: (data为文章的id)
+* 返回数据参考: 
 
 ```js
 {
@@ -268,4 +268,78 @@ cd tp5-api
 }
 ``` 
 
+### 获取文章详情接口API
 
+* 接口路由：Route::get('article/:time/:token/:article_id', 'article/articleDetail')
+* url请求(GET) : api.movi.com/article/1/1/8
+* post参数： * 表示必须字段
+
+
+    | time | token | article_id |
+    | :-: | :-: | :-: |
+    | int | int | int |
+    | *时间戳 | *验证身份 | *文章ID |
+
+* 返回数据参考: 
+
+```js
+{
+    "code": 200,
+    "msg": "查询成功！",
+    "data": {
+        "article_id": 8,
+        "article_ctime": 1523159078,
+        "article_title": "那年那月",
+        "article_content": "<script>console.log('风华雪月，大漠孤烟直!')</script>",
+        "user_nickname": "cici"
+    }
+}
+``` 
+
+### 修改文章接口API
+
+* 接口路由：Route::put('article', 'article/updateArticle')
+* url请求(PUT) : api.movi.com/article
+* put参数： * 表示必须字段  * x-www-form-urlencoded
+
+
+    | time | token | article_id | article_title | article_content |
+    | :-: | :-: | :-: | :-: | :-: |
+    | int | int | int | string | string |
+    | *时间戳 | *验证身份 | *文章ID | 文章标题 | 文章内容 |
+
+* 返回数据参考: 
+
+```js
+{
+    "code": 200,
+    "msg": "修改文章成功!",
+    "data": []
+}
+``` 
+
+### 删除文章接口API
+
+* 接口路由：Route::delete('article', 'article/deleteArticle')
+* url请求(PUT) : api.movi.com/article
+* put参数： * 表示必须字段  * x-www-form-urlencoded
+
+
+    | time | token | article_id | 
+    | :-: | :-: | :-: |
+    | int | int | int |
+    | *时间戳 | *验证身份 | *文章ID |
+
+* 返回数据参考: 
+
+```js
+{
+    "code": 200,
+    "msg": "删除文章成功!",
+    "data": []
+}
+``` 
+
+
+
+> 欢迎关注我的个人博客 ： [小青蛙的博客](http://blog.sina.com.cn/riversforg '小青蛙的博客')

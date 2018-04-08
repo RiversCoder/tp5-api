@@ -44,6 +44,15 @@ Route::post('article', 'article/addArticle');
 //配置文章列表请求路径
 Route::get('articles/:time/:token/:user_id/[:num]/[:page]', 'article/getArticles');
 
+//配置单篇文章详情请求路径
+Route::get('article/:time/:token/:article_id', 'article/articleDetail');
+
+//修改/更新文章请求路径
+Route::put('article', 'article/updateArticle');
+
+//删除文章
+Route::delete('article', 'article/deleteArticle');
+
 /*return [
 '__pattern__' => [
 'name' => '\w+',

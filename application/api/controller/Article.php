@@ -63,4 +63,66 @@ class Article extends Common
         }
     }
 
+    /**
+     * [单篇文章详情接口方法]
+     * @return [type] [description]
+     */
+    public function articleDetail()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+
+        //2. 查询数据库
+        $where['article_id'] = $this->datas['article_id'];
+        $field = 'article_id,article_ctime,article_title,article_content,user_nickname';
+        $join = [['api_user u', 'u.user_id = a.article_uid']];
+        $res = db('article')->alias('a')->field($field)->join($join)->where($where)->find();
+        if ($res === false) {
+            $this->returnMsg(400, '查询失败！');
+        } else if (empty($res)) {
+            $this->returnMsg(200, '暂无数据！');
+        } else {
+            //响应数据给客户端
+            $res['article_content'] = htmlspecialchars_decode($res['article_content'], $data['article_id']);
+            $this->returnMsg(200, '查询成功！', $res);
+        }
+    }
+
+    /**
+     * [修改保存文章接口方法]
+     * @return [null]
+     */
+    public function updateArticle()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+
+        //2. 存入数据库
+        $res = db('article')->where('article_id', $this->datas['article_id'])->update($this->datas);
+
+        if (!empty($res)) {
+            $this->returnMsg(200, '修改文章成功!');
+        } else {
+            $this->returnMsg(400, '修改文章失败!');
+        }
+    }
+
+    /**
+     * [删除文章接口方法]
+     * @return [null]
+     */
+    public function deleteArticle()
+    {
+        //1. 接收参数
+        $this->datas = $this->params;
+
+        //2. 从数据库删除
+        $res = db('article')->where('article_id', $this->datas['article_id'])->delete();
+
+        if ($res !== false) {
+            $this->returnMsg(200, '删除文章成功!');
+        } else {
+            $this->returnMsg(400, '删除文章失败!');
+        }
+    }
 }

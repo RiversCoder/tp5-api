@@ -60,6 +60,15 @@ class Common extends Controller
                 'num' => ['number'],
                 'page' => ['number'],
             ),
+            'articleDetail' => array(
+                'article_id' => ['require', 'number'],
+            ),
+            'updateArticle' => array(
+                'article_id' => ['require', 'number'],
+            ),
+            'deleteArticle' => array(
+                'article_id' => ['require', 'number'],
+            ),
         ),
         'Common' => array(
             'get_code' => array(
