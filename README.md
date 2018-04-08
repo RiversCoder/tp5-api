@@ -215,10 +215,10 @@ cd tp5-api
 * post参数： * 表示必须字段
 
 
-    | article_uid | article_title | artcle_time | article_content |
-    | :-: | :-: | :-: | :-: |
-    | int |  string | int | string |
-    | *用户ID | *文章标题 | *时间戳 | 文章内容 |
+    | time | token | article_uid | article_title | artcle_ctime | article_content |
+    | :-: | :-: | :-: | :-: | :-: | :-: |
+    | int | int | int |  string | int | string |
+    | *时间戳 | *验证身份 | *用户ID | *文章标题 | *发布时间 | 文章内容 |
 
 * 返回数据参考: (data为文章的id)
 
@@ -229,4 +229,43 @@ cd tp5-api
     "data": "5" 
 }
 ``` 
+
+### 文章列表接口API
+
+* 接口路由：Route::get('articles/:time/:token/:user_id/[:num]/[:page]', 'article/getArticles')
+* url请求(GET) : api.movi.com/articles/1/1/2/2/1
+* post参数： * 表示必须字段
+
+
+    | time | token | user_id | num | page |
+    | :-: | :-: | :-: | :-: | :-: |
+    | int | int | int |  int | int |
+    | *时间戳 | *验证身份 | *用户ID | 查询条数 | 查询页数 |
+
+* 返回数据参考: (data为文章的id)
+
+```js
+{
+    "code": 200,
+    "msg": "查询成功！",
+    "data": {
+        "articles": [
+            {
+                "article_id": 1,
+                "article_ctime": 1523030209,
+                "article_title": "太平洋战争",
+                "user_nickname": "cici"
+            },
+            {
+                "article_id": 2,
+                "article_ctime": 1523030405,
+                "article_title": "太平洋战争",
+                "user_nickname": "cici"
+            }
+        ],
+        "page_num": 4
+    }
+}
+``` 
+
 

@@ -55,6 +55,11 @@ class Common extends Controller
                 'article_title' => ['require', 'chsDash'],
                 'article_uid' => ['require', 'number'],
             ),
+            'getArticles' => array(
+                'user_id' => ['require', 'number'],
+                'num' => ['number'],
+                'page' => ['number'],
+            ),
         ),
         'Common' => array(
             'get_code' => array(

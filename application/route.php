@@ -41,6 +41,9 @@ Route::post('user/nickname', 'user/modifyUsername');
 //配置添加文章请求路径
 Route::post('article', 'article/addArticle');
 
+//配置文章列表请求路径
+Route::get('articles/:time/:token/:user_id/[:num]/[:page]', 'article/getArticles');
+
 /*return [
 '__pattern__' => [
 'name' => '\w+',
